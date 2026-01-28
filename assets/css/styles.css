@@ -32,9 +32,9 @@
     --text-light: #F7EFE5;
 
     /* Glassmorphism */
-    --glass-bg: rgba(253, 248, 243, 0.75);
-    --glass-border: rgba(201, 168, 108, 0.3);
-    --glass-shadow: 0 8px 32px rgba(45, 31, 36, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(45, 31, 36, 0.05);
 
     /* Spacing */
     --space-xs: 0.5rem;
@@ -332,9 +332,13 @@ button {
    ======================================== */
 
 .navbar {
-    position: relative;
-    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
     padding: var(--space-md) var(--space-xl);
+    transition: all var(--transition-base);
 }
 
 .nav-container {
@@ -390,7 +394,7 @@ button {
     font-family: var(--font-elegant);
     font-size: 0.9rem;
     font-style: italic;
-    color: var(--color-burgundy);
+    color: var(--color-gold-dark);
     letter-spacing: 0.1em;
     font-weight: 500;
 }
@@ -399,7 +403,8 @@ button {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: var(--space-xl);
+    gap: 4.5rem;
+    /* Luxurious spacing */
     list-style: none;
 }
 
@@ -407,7 +412,7 @@ button {
     font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     position: relative;
@@ -436,7 +441,7 @@ button {
     width: 100%;
 }
 
-/* Nav Actions - Gold-Ring Refinement */
+/* Nav Actions - Clear CTA focus */
 .nav-actions {
     display: flex;
     align-items: center;
@@ -2356,6 +2361,14 @@ button {
         gap: var(--space-2xl);
     }
 
+    .contact-hero-content {
+        text-align: center;
+    }
+
+    .contact-hero-desc {
+        margin-inline: auto;
+    }
+
     .contact-hero-visual {
         height: 300px;
     }
@@ -2384,8 +2397,21 @@ button {
         grid-template-columns: 1fr;
     }
 
+    .contact-method {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-lg);
+    }
+
     .whatsapp-cta-block {
         padding: var(--space-lg);
+    }
+
+    .btn-whatsapp-large {
+        width: 100%;
+        white-space: normal;
+        justify-content: center;
+        text-align: center;
     }
 }
 
