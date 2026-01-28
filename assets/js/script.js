@@ -57,8 +57,8 @@ function createMobileMenu() {
         <div class="mobile-menu-content">
             <nav class="mobile-nav">
                 <a href="#collections" class="mobile-nav-link">Our <em>Collections</em></a>
-                <a href="#story" class="mobile-nav-link">The <em>Story</em></a>
-                <a href="#craftsmanship" class="mobile-nav-link"><em>Craftsmanship</em></a>
+                <a href="#about" class="mobile-nav-link">About <em>Us</em></a>
+                <a href="#why-choose-us" class="mobile-nav-link">Why <em>Choose Us</em></a>
                 <a href="#contact" class="mobile-nav-link"><em>Contact</em> Us</a>
             </nav>
             <div class="mobile-cta">
@@ -129,13 +129,23 @@ function initializeParallaxEffects() {
 }
 
 /* ========================================
-   DYNAMIC PATTERN GENERATION
+   DYNAMIC PATTERN GENERATION & INTERACTIONS
    ======================================== */
 
 function initializeDynamicPatterns() {
     // Add subtle shimmer effect to gold elements on scroll
-    const heroSection = document.querySelector('.hero');
+    // Changed to target hero-content instead of the whole hero section
+    // so the navbar (which is in .hero) doesn't fade out
+    const heroContent = document.querySelector('.hero-content');
     const goldElements = document.querySelectorAll('.logo-icon, .badge-icon, .title-line-3 em');
+
+    // Search button interaction
+    const searchBtn = document.querySelector('.btn-icon[aria-label="Search"]');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+            alert('Search functionality coming soon!');
+        });
+    }
 
     let ticking = false;
 
@@ -145,8 +155,8 @@ function initializeDynamicPatterns() {
                 const scrollY = window.scrollY;
                 const opacity = Math.max(0, 1 - scrollY / 500);
 
-                if (heroSection) {
-                    heroSection.style.opacity = opacity;
+                if (heroContent) {
+                    heroContent.style.opacity = opacity;
                 }
 
                 ticking = false;
