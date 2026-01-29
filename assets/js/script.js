@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMobileMenu();
     initializeParallaxEffects();
     initializeDynamicPatterns();
+    initializeHeroZIndexRotation();
 });
 
 /* ========================================
@@ -241,4 +242,52 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeCraftsmanshipJourney);
 } else {
     initializeCraftsmanshipJourney();
+}
+
+// Add to initialization
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing init calls ...
+});
+
+/* ========================================
+   HERO Z-INDEX ROTATION (MOBILE)
+   ======================================== */
+
+function initializeHeroZIndexRotation() {
+    const cards = [
+        document.querySelector('.showcase-card-1'),
+        document.querySelector('.showcase-card-2'),
+        document.querySelector('.showcase-card-3')
+    ];
+
+    if (cards.some(c => !c)) return;
+
+    let step = 0;
+
+    function cycle() {
+        if (window.innerWidth > 768) return;
+
+        // Cycle through 3 states using data attributes for smooth transitions
+        if (step === 0) {
+            cards[0].setAttribute('data-priority', 'top');
+            cards[1].setAttribute('data-priority', 'middle');
+            cards[2].setAttribute('data-priority', 'bottom');
+        } else if (step === 1) {
+            cards[0].setAttribute('data-priority', 'bottom');
+            cards[1].setAttribute('data-priority', 'top');
+            cards[2].setAttribute('data-priority', 'middle');
+        } else {
+            cards[0].setAttribute('data-priority', 'middle');
+            cards[1].setAttribute('data-priority', 'bottom');
+            cards[2].setAttribute('data-priority', 'top');
+        }
+
+        step = (step + 1) % 3;
+    }
+
+    // Change every 3 seconds
+    setInterval(cycle, 3000);
+
+    // Initial call
+    cycle();
 }
