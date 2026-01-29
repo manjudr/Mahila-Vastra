@@ -133,11 +133,23 @@ function initializeDynamicPatterns() {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const scrollY = window.scrollY;
-                // Increased threshold to 1200 and ensured some visibility remains
-                const opacity = Math.max(0.1, 1 - scrollY / 1200);
+
+                // Optimized Hero Fade: 
+                // Starts after 200px, reaches 0.1 opacity at 1000px scroll
+                const startFade = 200;
+                const fadeDistance = 800;
 
                 if (heroContent) {
+                    let opacity = 1;
+                    let translateY = 0;
+
+                    if (scrollY > startFade) {
+                        opacity = Math.max(0.1, 1 - (scrollY - startFade) / fadeDistance);
+                        translateY = (scrollY - startFade) * 0.2; // Gentle parallax
+                    }
+
                     heroContent.style.opacity = opacity;
+                    heroContent.style.transform = `translateY(${translateY}px)`;
                 }
 
                 ticking = false;
