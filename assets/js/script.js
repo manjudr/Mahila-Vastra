@@ -30,53 +30,33 @@ function initializeAnimations() {
 
 function initializeMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
+    const mobileMenu = document.querySelector('.mobile-menu');
 
-    if (!menuBtn) return;
+    if (!menuBtn || !mobileMenu) return;
 
     menuBtn.addEventListener('click', () => {
         menuBtn.classList.toggle('active');
-
-        // Create mobile menu if it doesn't exist
-        let mobileMenu = document.querySelector('.mobile-menu');
-
-        if (!mobileMenu) {
-            mobileMenu = createMobileMenu();
-            document.body.appendChild(mobileMenu);
-        }
-
         mobileMenu.classList.toggle('open');
         document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
     });
-}
-
-function createMobileMenu() {
-    const menu = document.createElement('div');
-    menu.className = 'mobile-menu';
-    menu.innerHTML = `
-        <div class="mobile-menu-content">
-            <nav class="mobile-nav">
-                <a href="#collections" class="mobile-nav-link">Our <em>Collections</em></a>
-                <a href="#about" class="mobile-nav-link">About <em>Us</em></a>
-                <a href="#why-choose-us" class="mobile-nav-link">Why <em>Choose Us</em></a>
-                <a href="#contact" class="mobile-nav-link"><em>Contact</em> Us</a>
-            </nav>
-            <div class="mobile-cta">
-                <a href="#collections" class="btn-nav-cta">Shop Now</a>
-            </div>
-        </div>
-    `;
 
     // Close menu when clicking links
-    menu.querySelectorAll('a').forEach(link => {
+    mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            menu.classList.remove('open');
-            document.querySelector('.mobile-menu-btn').classList.remove('active');
+            mobileMenu.classList.remove('open');
+            menuBtn.classList.remove('active');
             document.body.style.overflow = '';
         });
     });
 
-    return menu;
+    // Close menu when clicking outside
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            mobileMenu.classList.remove('open');
+            menuBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
 }
 
 /* ========================================

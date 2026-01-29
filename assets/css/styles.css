@@ -454,11 +454,12 @@ button {
 }
 
 /* Nav Links - Editorial Style */
+/* Nav Links - Editorial Style */
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 4.5rem;
-    /* Luxurious spacing */
+    gap: 2rem;
+    /* Reduced from 4.5rem to fit more items */
     list-style: none;
 }
 
@@ -489,6 +490,68 @@ button {
 .nav-link:hover {
     color: var(--color-burgundy);
     transform: translateY(-1px);
+}
+
+/* Premium Link Style */
+.nav-link-premium {
+    color: var(--color-gold) !important;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: relative;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(201, 168, 108, 0.4);
+    border-radius: 100px;
+    background: rgba(201, 168, 108, 0.05);
+    transition: all 0.3s ease;
+}
+
+.nav-link-premium::after {
+    display: none;
+    /* Remove standard underline */
+}
+
+.premium-star {
+    font-size: 1.1em;
+    animation: twinkle 3s infinite;
+}
+
+.nav-link-premium:hover {
+    background: var(--color-gold);
+    color: var(--color-burgundy) !important;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 15px rgba(201, 168, 108, 0.4);
+    transform: translateY(-1px);
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(0.8);
+    }
+}
+
+/* Mobile Premium Link */
+.mobile-nav-premium {
+    color: var(--color-gold) !important;
+    border: 1px solid rgba(201, 168, 108, 0.3);
+    padding: 0.5rem 1.5rem;
+    border-radius: 100px;
+    margin-top: 0.5rem;
+    background: rgba(201, 168, 108, 0.05);
+}
+
+.mobile-nav-premium:hover {
+    background: rgba(201, 168, 108, 0.15);
+    border-color: var(--color-gold);
 }
 
 /* Nav Actions - Clear CTA focus */
@@ -615,6 +678,23 @@ button {
     transform: translateY(-8px) rotate(-45deg);
 }
 
+/* Responsive Navigation Breakpoint */
+@media (max-width: 1150px) {
+
+    .nav-links,
+    .nav-actions {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: var(--space-xs) var(--space-md);
+    }
+}
+
 /* Mobile Menu Overlay - Move from JS to CSS for variables */
 .mobile-menu {
     position: fixed;
@@ -653,31 +733,49 @@ button {
 .mobile-nav {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    margin-bottom: 4rem;
+    gap: 1.5rem;
+    /* Reduced gap to fit more items */
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .mobile-nav-link {
-    font-family: var(--font-display);
-    font-size: 2.2rem;
+    font-family: var(--font-body);
+    /* Changed to Montserrat to match desktop */
+    font-size: 1.25rem;
+    /* adjusted size */
     font-weight: 500;
     color: var(--text-primary);
     text-decoration: none;
     transition: all 0.3s ease;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    /* Increased letter spacing like desktop */
+    text-transform: uppercase;
+    /* Match desktop style */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .mobile-nav-link em {
-    font-family: var(--font-elegant);
-    font-style: thin;
-    font-size: 2.8rem;
-    color: var(--color-gold);
+    font-family: var(--font-body);
+    /* Remove special font for emphasis to keep consistent */
+    font-style: normal;
+    font-size: inherit;
+    color: inherit;
+    font-weight: 500;
 }
 
-.mobile-nav-link:hover {
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
     color: var(--color-burgundy);
-    transform: scale(1.05);
+    transform: none;
+    /* Removed scale transform */
 }
+
 
 /* Tactile Clickable States */
 .btn-nav-cta:active,
