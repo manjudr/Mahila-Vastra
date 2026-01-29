@@ -97,28 +97,17 @@
     }
 }
 
-html {
-    scroll-padding-top: 80px;
-    /* Offset for sticky navbar */
-}
-
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* Modern Focus Indicators */
-:focus-visible {
-    outline: 2px solid var(--color-gold);
-    outline-offset: 4px;
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /* Extra containment for mobile */
+    overflow-x: clip;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -126,7 +115,7 @@ body {
     color: var(--text-primary);
     background: var(--color-ivory);
     line-height: 1.6;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -154,6 +143,14 @@ button {
     pointer-events: none;
     z-index: var(--z-background);
     overflow: hidden;
+    /* Ensure decorative elements never cause overflow */
+}
+
+/* Global Responsive Adjustments */
+img,
+svg {
+    max-width: 100%;
+    height: auto;
 }
 
 .pattern {
@@ -3521,12 +3518,77 @@ button {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0;
+    }
+
+    .nav-container {
+        border-radius: 0;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: var(--space-sm) var(--space-md);
+        border: none;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
     .tier-grid {
         grid-template-columns: 1fr;
     }
 
     .badges-container {
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+        padding: var(--space-lg) var(--space-md);
+        width: 100%;
+        background: white;
+    }
+
+    .badge-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--space-sm);
+        gap: var(--space-xs);
+        background: rgba(139, 41, 66, 0.02);
+        border-radius: var(--radius-md);
+    }
+
+    .badge-icon-small {
+        margin-bottom: var(--space-xs);
+    }
+
+    .badge-icon-small svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .badge-item span {
+        font-size: 0.7rem;
+        text-align: center;
+        line-height: 1.4;
+        max-width: 120px;
+    }
+
+    .section-chain {
+        margin-top: var(--space-lg);
+        padding-top: var(--space-md);
+        width: 90%;
+    }
+
+    .footer-container {
+        padding: 0 var(--space-md);
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 480px) {
+    .badge-item span {
+        font-size: 0.7rem;
+    }
+
+    .logo-main {
+        font-size: 1.1rem;
     }
 }
 

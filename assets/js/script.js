@@ -133,23 +133,30 @@ function initializeDynamicPatterns() {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const scrollY = window.scrollY;
+                const vh = window.innerHeight;
+                const isMobile = window.innerWidth <= 768;
 
-                // Optimized Hero Fade: 
-                // Starts after 200px, reaches 0.1 opacity at 1000px scroll
-                const startFade = 200;
-                const fadeDistance = 800;
+                // Responsive Hero Fade:
+                // Content stays 100% visible for much longer on mobile
+                const startFade = isMobile ? vh * 0.7 : vh * 0.4;
+                const fadeDistance = vh * 1.5;
 
                 if (heroContent) {
                     let opacity = 1;
                     let translateY = 0;
 
                     if (scrollY > startFade) {
-                        opacity = Math.max(0.1, 1 - (scrollY - startFade) / fadeDistance);
-                        translateY = (scrollY - startFade) * 0.2; // Gentle parallax
+                        // Very gradual fade (minimum 0.15 opacity)
+                        opacity = Math.max(0.15, 1 - (scrollY - startFade) / fadeDistance);
+
+                        // Disable parallax on mobile for reading stability
+                        if (!isMobile) {
+                            translateY = (scrollY - startFade) * 0.15;
+                        }
                     }
 
                     heroContent.style.opacity = opacity;
-                    heroContent.style.transform = `translateY(${translateY}px)`;
+                    heroContent.style.transform = `translate3d(0, ${translateY}px, 0)`;
                 }
 
                 ticking = false;
