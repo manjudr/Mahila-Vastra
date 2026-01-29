@@ -88,7 +88,7 @@ function initializeParallaxEffects() {
             const intensity = (index + 1) * 8;
             const x = targetX * intensity;
             const y = targetY * intensity;
-            pattern.style.transform = `translate(${x}px, ${y}px)`;
+            pattern.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
 
         // Animate floating elements
@@ -96,14 +96,14 @@ function initializeParallaxEffects() {
             const intensity = (index + 1) * 15;
             const x = targetX * intensity;
             const y = targetY * intensity;
-            el.style.transform = `translate(${x}px, ${y}px)`;
+            el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
 
         requestAnimationFrame(animate);
     }
 
-    // Only run parallax on non-touch devices
-    if (!('ontouchstart' in window)) {
+    // Run parallax if the user has a precision pointer (mouse/stylus) or on non-touch devices
+    if (window.matchMedia('(pointer: fine)').matches) {
         animate();
     }
 }
@@ -123,7 +123,7 @@ function initializeDynamicPatterns() {
     const searchBtn = document.querySelector('.btn-icon[aria-label="Search"]');
     if (searchBtn) {
         searchBtn.addEventListener('click', () => {
-            alert('Search functionality coming soon!');
+            console.log('Search functionality coming soon!');
         });
     }
 
@@ -133,7 +133,8 @@ function initializeDynamicPatterns() {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const scrollY = window.scrollY;
-                const opacity = Math.max(0, 1 - scrollY / 500);
+                // Increased threshold to 1200 and ensured some visibility remains
+                const opacity = Math.max(0.1, 1 - scrollY / 1200);
 
                 if (heroContent) {
                     heroContent.style.opacity = opacity;
