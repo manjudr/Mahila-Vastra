@@ -1140,24 +1140,31 @@ svg {
     display: flex;
     flex-direction: column;
 
-    /* Premium Slow Flow Shine - Applied to Complete Text */
-    background: linear-gradient(120deg,
-            var(--color-burgundy) 0%,
-            var(--color-burgundy) 42%,
-            #D4AF37 50%,
-            var(--color-burgundy) 58%,
-            var(--color-burgundy) 100%);
+    /* Fixed Premium Shine - Burgundy Base with flowing Gold Highlight */
+    background: linear-gradient(to right,
+            #8B2942 0%,
+            #8B2942 35%,
+            #FFF5E6 48%,
+            /* Leading edge */
+            #FFD700 50%,
+            /* Bright Gold Center */
+            #FFF5E6 52%,
+            /* Trailing edge */
+            #8B2942 65%,
+            #8B2942 100%);
     background-size: 300% auto;
     background-position: 100% 0;
+    /* Starts as Burgundy */
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    transition: background-position 3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: background-position 2.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo:hover .logo-text {
     background-position: 0% 0;
+    /* Sweeps the Gold light across */
 }
 
 .logo-main {
