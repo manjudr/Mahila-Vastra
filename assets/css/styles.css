@@ -3374,10 +3374,20 @@ svg {
 
     .contact-hero-content {
         text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .contact-hero-desc {
         margin-inline: auto;
+    }
+
+    .whatsapp-cta-block {
+        margin-inline: auto;
+        width: 100%;
+        max-width: 600px;
     }
 
     .contact-hero-visual {
@@ -3431,9 +3441,10 @@ svg {
     /* Also Compact the WhatsApp Block */
     .whatsapp-cta-block {
         flex-direction: column;
-        padding: var(--space-lg);
+        padding: var(--space-md);
         text-align: center;
         gap: var(--space-md);
+        width: 100%;
     }
 
     .whatsapp-cta-content {
@@ -3451,11 +3462,17 @@ svg {
 
 @media (max-width: 640px) {
     .contact {
-        padding: var(--space-2xl) 0;
+        padding: var(--space-xl) 0;
     }
 
     .contact-hero-title {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        font-size: clamp(2rem, 7vw, 2.8rem);
+        margin-bottom: var(--space-md);
+    }
+
+    .contact-hero-desc {
+        font-size: 1rem;
+        margin-bottom: var(--space-lg);
     }
 
     .contact-methods {
@@ -3469,7 +3486,8 @@ svg {
     }
 
     .whatsapp-cta-block {
-        padding: var(--space-lg);
+        padding: var(--space-md);
+        margin-top: var(--space-md);
     }
 
     .btn-whatsapp-large {
@@ -3477,6 +3495,18 @@ svg {
         white-space: normal;
         justify-content: center;
         text-align: center;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-cta-text h3 {
+        font-size: 1.2rem;
+    }
+
+    .whatsapp-cta-text p {
+        font-size: 0.85rem;
     }
 }
 
