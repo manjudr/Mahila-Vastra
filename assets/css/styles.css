@@ -962,8 +962,10 @@ svg {
     }
 
     .hero-gallery {
-        height: 380px;
-        transform: scale(0.85);
+        height: 320px;
+        /* Reduced to remove whitespace */
+        transform: scale(1.05);
+        /* Larger cards */
         margin-bottom: var(--space-xl);
         position: relative;
     }
@@ -1137,24 +1139,52 @@ svg {
 .logo-text {
     display: flex;
     flex-direction: column;
+
+    /* Premium Slow Flow Shine - Applied to Complete Text */
+    background: linear-gradient(120deg,
+            var(--color-burgundy) 0%,
+            var(--color-burgundy) 42%,
+            #D4AF37 50%,
+            var(--color-burgundy) 58%,
+            var(--color-burgundy) 100%);
+    background-size: 300% auto;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    transition: background-position 3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.logo:hover .logo-text {
+    background-position: 0% 0;
 }
 
 .logo-main {
     font-family: var(--font-display);
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--color-burgundy);
     letter-spacing: 0.05em;
     line-height: 1.1;
+    color: inherit;
+    /* Inherit gradient from parent */
 }
 
 .logo-tagline {
     font-family: var(--font-elegant);
     font-size: 0.9rem;
     font-style: italic;
-    color: var(--color-gold-dark);
     letter-spacing: 0.1em;
     font-weight: 500;
+    margin-top: 2px;
+    color: inherit;
+    /* Inherit gradient from parent */
+}
+
+/* Remove all pseudo-elements */
+.logo-main::after,
+.logo-main::before {
+    content: none !important;
 }
 
 /* Hero Status Badge - Opening Soon */
@@ -1486,9 +1516,9 @@ svg {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    background: var(--color-ivory);
+    /* Solid background for visibility */
+    /* Removed glass effect conflicting with text readability */
     z-index: var(--z-overlay);
     display: flex;
     flex-direction: column;
@@ -2077,12 +2107,33 @@ svg {
 }
 
 /* Collection Header Spacing */
+/* Collection Header Spacing & Theming */
 .catalog-category-section {
-    margin-bottom: var(--space-lg);
+    padding: var(--space-xl) 0;
+    /* Reduced from 2xl */
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(201, 168, 108, 0.15);
+    /* Slightly stronger separator */
 }
 
 .catalog-category-section:last-child {
-    margin-bottom: 0;
+    border-bottom: none;
+}
+
+/* Reverted Layout - Clean & Uniform */
+.section-daily-wear,
+.section-blouses,
+.section-kids {
+    background: transparent;
+    /* Removed specific colors */
+}
+
+.section-daily-wear .section-title em,
+.section-kids .section-title {
+    color: var(--color-burgundy);
+    /* Reset Colors */
+    background: none;
+    -webkit-text-fill-color: initial;
 }
 
 /* Tier Badges */
@@ -2348,24 +2399,35 @@ svg {
 }
 
 .collection-title {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
+    /* Changed to body font for readability */
     font-size: 1.6rem;
-    font-weight: 600;
-    color: #FDF8F3;
+    font-weight: 700;
+    /* Increased weight */
+    color: #FFFFFF;
+    /* Pure white */
     margin-bottom: var(--space-xs);
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    /* Stronger shadow for contrast */
+    letter-spacing: -0.01em;
 }
 
 .card-tall .collection-title {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
+    /* Slightly reduced for better fit with bold font */
 }
 
 .collection-desc {
     font-family: var(--font-body);
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    /* Increased weight */
+    color: rgba(255, 255, 255, 0.95);
+    /* Higher opacity */
     margin-bottom: var(--space-md);
-    line-height: 1.4;
+    line-height: 1.5;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    /* Added shadow */
     max-width: 85%;
     opacity: 0;
     transform: translateY(10px);
@@ -2847,23 +2909,63 @@ svg {
         font-size: 1.4rem !important;
     }
 
+    /* Redesigned Mobile Layout: Horizontal Swipeable Cards */
     .promise-features {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm);
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: var(--space-md);
+        padding-bottom: 1rem;
+        /* Space for scroll shadow/touch */
+
+        /* Bleed out effects */
+        margin-right: -var(--space-md);
+        padding-right: var(--space-md);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Hide scrollbar for clean look */
+    }
+
+    .promise-features::-webkit-scrollbar {
+        display: none;
     }
 
     .promise-feature {
-        padding: var(--space-md) var(--space-sm);
+        flex: 0 0 85%;
+        /* Shows most of one card + peek of next */
+        scroll-snap-align: center;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.95);
+        /* Simpler, cleaner, solid card */
+        border: 1px solid var(--color-gold-light);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        /* Soft shadow */
     }
 
+    /* Reset Icon Sizes to elegant proportions */
     .feature-icon-large {
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0.8rem;
     }
 
     .feature-icon-large svg {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .feature-title {
+        font-size: 1.1rem;
+        color: var(--color-burgundy);
+        margin-bottom: 0.3rem;
+    }
+
+    .feature-desc {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        opacity: 1;
+        /* Restore opacity */
     }
 
     .badge-days {
@@ -2994,7 +3096,8 @@ svg {
 .contact {
     position: relative;
     background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-ivory) 50%, var(--color-cream) 100%);
-    padding: calc(var(--space-2xl) * 2) 0;
+    padding: var(--space-xl) 0;
+    /* Drastically reduced from 2*2xl */
     overflow: hidden;
 }
 
@@ -3008,9 +3111,11 @@ svg {
 .contact-hero {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    gap: calc(var(--space-2xl) * 2);
+    gap: var(--space-2xl);
+    /* Reduced gap */
     align-items: center;
-    margin-bottom: calc(var(--space-2xl) * 2);
+    margin-bottom: var(--space-xl);
+    /* Reduced margin */
 }
 
 .contact-hero-content {
@@ -3041,7 +3146,8 @@ svg {
     font-size: 1.1rem;
     color: var(--text-secondary);
     line-height: 1.8;
-    margin-bottom: calc(var(--space-2xl) * 1.5);
+    margin-bottom: var(--space-xl);
+    /* Reduced margin */
     max-width: 580px;
 }
 
@@ -3250,18 +3356,72 @@ svg {
 
     .contact-hero-visual {
         height: 300px;
+        order: -1;
+        /* Show visual first on mobile? Or keep below? User didn't specify, keeping default order for now but maybe hiding it? */
+        /* Actually, let's keep it but make it smaller */
+        display: none;
+        /* Hide visual on mobile to save space if needed, or just keep it */
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* Compact Contact Methods on Mobile */
+    .contact-methods {
+        grid-template-columns: 1fr;
+        /* Stack clearly */
+        gap: var(--space-sm);
+        /* Tighter gap */
     }
 
+    .contact-method {
+        padding: var(--space-md);
+        /* Much smaller padding */
+        gap: var(--space-md);
+        min-height: auto;
+    }
+
+    .contact-method-icon {
+        width: 48px;
+        height: 48px;
+        /* Smaller icon container */
+        font-size: 1.2rem;
+    }
+
+    .contact-method-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .contact-method-info h4 {
+        font-size: 1rem;
+    }
+
+    .contact-method-info p,
+    .contact-method-info a {
+        font-size: 0.9rem;
+    }
+
+    /* Also Compact the WhatsApp Block */
     .whatsapp-cta-block {
         flex-direction: column;
+        padding: var(--space-lg);
         text-align: center;
+        gap: var(--space-md);
     }
 
     .whatsapp-cta-content {
         flex-direction: column;
-        text-align: center;
+        gap: var(--space-sm);
+    }
+
+    .btn-whatsapp-large {
+        width: 100%;
+        justify-content: center;
     }
 }
+
+
 
 @media (max-width: 640px) {
     .contact {
@@ -3295,13 +3455,447 @@ svg {
 }
 
 /* ========================================
+   OUR PROMISE SECTION - ELEGANT CARD DESIGN
+   ======================================== */
+
+.our-promise {
+    background-color: #faf9f6;
+    padding: var(--space-2xl) var(--space-md);
+    /* Reduced top/bottom padding */
+    display: flex;
+    justify-content: center;
+}
+
+.promise-container {
+    max-width: 900px;
+    /* Slightly narrower container */
+    width: 100%;
+}
+
+.promise-card {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: var(--space-2xl) var(--space-xl);
+    /* Reduced internal padding */
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border-top: 3px solid var(--color-gold);
+    position: relative;
+    overflow: hidden;
+    /* Crucial for clipping the corner ribbon */
+}
+
+/* ======================================== 
+   UNIFIED VALUES STRIP (Merging Commitment & Trust)
+   ======================================== */
+.values-strip {
+    background: linear-gradient(to right, #FAF7F2, #FFF);
+    border-top: 1px solid rgba(201, 168, 108, 0.2);
+    border-bottom: 1px solid rgba(201, 168, 108, 0.2);
+    padding: var(--space-lg) 0;
+    margin-top: var(--space-xl);
+}
+
+.values-strip-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+}
+
+.values-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.values-text .chain-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.values-text .chain-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--color-burgundy);
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+
+.btn-link-gold {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-gold-dark);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-link-gold:hover {
+    color: var(--color-burgundy);
+    border-bottom-color: var(--color-burgundy);
+}
+
+.values-badges {
+    display: flex;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.badge-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.badge-icon-mini {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(201, 168, 108, 0.15);
+    color: var(--color-burgundy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.badge-mini span {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Response */
+@media (max-width: 900px) {
+    .values-strip-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-lg);
+    }
+
+    .values-badges {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: var(--space-md);
+    }
+}
+
+/* Section Chain (Commitment -> Promise) */
+.section-chain {
+    text-align: center;
+    margin-top: var(--space-md);
+    border-top: 1px solid rgba(201, 168, 108, 0.1);
+    /* Lighter border */
+    padding-top: var(--space-md);
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.chain-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xs);
+}
+
+.chain-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-sm);
+    /* Reduced margin */
+}
+
+/* ========================================
+   TRUST BADGES (The 100% Quality / Chat / Return row)
+   ======================================== */
+.trust-badges {
+    background: var(--color-ivory);
+    padding: 0 !important;
+    /* FORCE 0 padding */
+    margin: 0 !important;
+    border-top: none;
+    margin-top: -20px !important;
+    /* Pull up slightly */
+    position: relative;
+    z-index: 5;
+}
+
+.badges-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    padding-top: 0 !important;
+    padding-bottom: var(--space-md);
+}
+
+/* Header Section */
+.promise-header {
+    margin-bottom: var(--space-xl);
+    /* Reduced bottom margin */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.promise-subtitle {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-gold-dark);
+    margin-bottom: var(--space-md);
+    font-weight: 600;
+}
+
+.promise-title {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    font-weight: 400;
+}
+
+.promise-title em {
+    font-family: var(--font-elegant);
+    font-style: italic;
+    color: var(--color-burgundy);
+}
+
+.promise-description {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Icons Grid */
+/* Icons Grid */
+.promise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    /* Reduced gap */
+    margin-bottom: var(--space-xl);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: var(--space-xl);
+    /* Reduced top padding */
+}
+
+.promise-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.promise-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(184, 150, 85, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold-dark);
+    margin-bottom: var(--space-md);
+    transition: transform 0.3s ease;
+}
+
+.promise-item:hover .promise-icon {
+    transform: scale(1.1);
+    background: rgba(184, 150, 85, 0.2);
+}
+
+.promise-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin-bottom: var(--space-xs);
+    color: var(--text-primary);
+}
+
+.promise-item p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 250px;
+}
+
+/* Footer Seal */
+/* Mahila Vastra Ink Stamp Seal */
+.mv-seal {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 120px;
+    /* Slightly larger for text */
+    height: 120px;
+    z-index: 10;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+.mv-seal-circle {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #E53935;
+    /* EVEN BRIGHTER VISIBLE RED */
+
+    /* Double Border Effect */
+    border: 3px solid #E53935;
+    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #E53935;
+
+    position: relative;
+    transform: rotate(-12deg);
+    opacity: 1;
+    /* Full opacity */
+
+    /* GRUNGE TEXTURE */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.7'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.7'/%3E%3C/svg%3E");
+}
+
+/* Grungy texture overlay for realism (optional, kept simple for now) */
+
+.mv-seal-text {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.1;
+    margin-top: 4px;
+}
+
+.seal-star {
+    font-size: 1.2rem;
+    margin-top: -2px;
+    color: var(--color-burgundy);
+    text-shadow: none;
+}
+
+.mv-seal-inner-ring {
+    display: none;
+    /* Removed for cleaner stamp look */
+}
+
+.seal-tagline-text {
+    font-family: var(--font-body);
+    font-size: 0.45rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-top: 3px;
+    opacity: 0.9;
+    white-space: nowrap;
+}
+
+/* Footer Seal (Bottom) - Keeping it simpler */
+.promise-footer {
+    margin-top: var(--space-xl);
+    position: relative;
+}
+
+.promise-signature {
+    font-family: var(--font-elegant);
+    font-size: 1.5rem;
+    color: var(--color-burgundy);
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .our-promise {
+        padding: var(--space-lg) var(--space-xs);
+        /* Wider visual appearance */
+    }
+
+    .promise-card {
+        padding: var(--space-xl) var(--space-md);
+        /* Use md for sides to gain width */
+        padding-top: calc(var(--space-2xl) + 20px);
+        /* Extra space for Seal */
+        padding-bottom: var(--space-2xl);
+    }
+
+    /* Mobile Responsive Seal */
+    .mv-seal {
+        width: 80px;
+        /* Slightly smaller seal */
+        height: 80px;
+        top: -10px;
+        right: -5px;
+    }
+
+    .mv-seal-text {
+        font-size: 0.5rem;
+    }
+
+    .promise-title {
+        font-size: 1.75rem;
+        /* Reduced from 2rem to fit better */
+        line-height: 1.2;
+        margin-bottom: var(--space-lg);
+        padding-right: 40px;
+        /* Ensure text doesn't hit seal */
+    }
+
+    .promise-text-main {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    /* Stack grid vertical on mobile with breathing room */
+    .promise-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+        padding-top: var(--space-lg);
+        margin-top: var(--space-lg);
+        border-top: 1px dashed rgba(201, 168, 108, 0.3);
+        /* Visual separator */
+    }
+
+    .promise-item p {
+        max-width: 100%;
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
    FOOTER
    ======================================== */
 
 .footer {
     background: linear-gradient(180deg, var(--color-burgundy) 0%, #6B2942 100%);
     color: var(--color-cream);
-    padding: calc(var(--space-2xl) * 2) 0 var(--space-xl);
+    padding: var(--space-2xl) 0 var(--space-lg);
+    /* Reduced top/bottom padding */
 }
 
 .footer-container {
@@ -3313,8 +3907,10 @@ svg {
 .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: calc(var(--space-2xl) * 1.5);
-    margin-bottom: var(--space-2xl);
+    gap: var(--space-xl);
+    /* Reduced gap */
+    margin-bottom: var(--space-xl);
+    /* Reduced bottom margin */
 }
 
 .footer-logo {
@@ -3585,27 +4181,65 @@ svg {
     padding: 0 var(--space-lg);
 }
 
-.tier-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
-    margin-top: var(--space-xl);
+/* ======================================== 
+   VALUES SECTION (Beyond Design)
+   ======================================== */
+.our-values {
+    background: transparent;
+    padding: var(--space-lg) 0;
+    /* Further reduced */
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
 }
 
-.tier-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: var(--space-2xl) var(--space-xl);
-    border-radius: var(--radius-xl);
-    border: 1px solid rgba(201, 168, 108, 0.15);
-    text-align: center;
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 Columns for more compact cards */
+    gap: var(--space-md);
+    /* Tighter gap */
+    margin-bottom: var(--space-lg);
+}
+
+.pillar-item {
+    position: relative;
+    padding: var(--space-lg);
+    /* Reduced padding */
+    background: #fff;
+    border: 1px solid rgba(201, 168, 108, 0.2);
+    border-radius: var(--radius-md);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    align-items: flex-start;
+}
+
+.pillar-title {
+    font-size: 1.1rem;
+    /* Slightly smaller title */
+    margin-bottom: var(--space-xs);
+}
+
+.pillar-desc {
+    font-size: 0.9rem;
+    /* Compact description */
+    line-height: 1.5;
+}
+
+/* Update Responsive for 4 columns */
+@media (max-width: 1100px) {
+    .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .tier-card::before {
