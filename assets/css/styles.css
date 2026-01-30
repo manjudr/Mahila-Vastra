@@ -386,12 +386,19 @@ svg {
 
 .line-prefix {
     font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-burgundy);
-    margin-bottom: -0.5rem;
+    font-size: 4rem;
+    font-weight: 400;
+    font-style: italic;
+    text-transform: lowercase;
+    background: linear-gradient(135deg, var(--color-gold-dark) 0%, var(--color-gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: -1.8rem;
+    margin-left: -0.5rem;
+    display: inline-block;
+    transform: rotate(-2deg);
+    opacity: 0.9;
     animation-delay: 0.2s;
 }
 
@@ -940,6 +947,13 @@ svg {
         align-items: center;
     }
 
+    .line-prefix {
+        font-size: 2.2rem;
+        letter-spacing: normal;
+        margin-bottom: -0.8rem;
+        margin-left: 0;
+    }
+
     .line-main {
         font-size: 3.5rem;
     }
@@ -949,8 +963,12 @@ svg {
     }
 
     .title-thread {
-        display: none;
-        /* Hide complex thread on very small screens */
+        display: block;
+        width: 140%;
+        left: -20%;
+        top: 30%;
+        transform: scale(0.7);
+        opacity: 0.5 !important;
     }
 
     .hero-description {
