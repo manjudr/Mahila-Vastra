@@ -757,9 +757,66 @@
             <div class="promise-card">
                 <!-- Round Seal -->
                 <div class="mv-seal">
-                    <div class="mv-seal-circle">
-                        <div class="mv-seal-text">Mahila<br>Vastra</div>
-                    </div>
+                    <!-- SVG Vintage Rubber Stamp -->
+                    <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Text Lane Radius: 83 (Between Outer 97 and Inner 70) -->
+
+                            <!-- TOP ARC: From 17,100 to 183,100 (Radius 83) -->
+                            <path id="arcTop" d="M 17,100 A 83,83 0 0,1 183,100" fill="none" stroke="none" />
+
+                            <!-- BOTTOM ARC: From 17,100 to 183,100 (Radius 83) -->
+                            <path id="arcBottom" d="M 17,100 A 83,83 0 0,0 183,100" fill="none" stroke="none" />
+
+                            <!-- Star Definition -->
+                            <path id="star"
+                                d="M 0,-10 L 2.4,-3.2 L 9.5,-3.2 L 3.6,1.2 L 5.9,8.1 L 0,3.9 L -5.9,8.1 L -3.6,1.2 L -9.5,-3.2 L -2.4,-3.2 Z"
+                                fill="#C02A2A" stroke="none" />
+
+                            <!-- Safer Grunge Filter -->
+                            <filter id="roughPaper">
+                                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
+                                <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2">
+                                    <feDistantLight azimuth="45" elevation="60" />
+                                </feDiffuseLighting>
+                                <feComposite operator="in" in2="SourceGraphic" />
+                            </filter>
+                        </defs>
+                        <g fill="none" stroke="#C02A2A" stroke-width="3">
+                            <!-- Outer Ring (r=97) -->
+                            <circle cx="100" cy="100" r="97" stroke-width="3" />
+                            <!-- Inner Ring (r=70) - Text sits between 70 and 97 -->
+                            <circle cx="100" cy="100" r="70" stroke-width="2" />
+
+                            <!-- Center Stars: Perfectly Symmetrical -->
+                            <g>
+                                <!-- Center Star: Larger, at absolute center (100,100) -->
+                                <use href="#star" x="100" y="100"
+                                    transform="translate(100, 100) scale(1.4) translate(-100, -100)" />
+
+                                <!-- Left Star: Smaller, shifted left -->
+                                <use href="#star" x="70" y="100"
+                                    transform="translate(70, 100) scale(1.0) translate(-70, -100)" />
+
+                                <!-- Right Star: Smaller, shifted right by same amount -->
+                                <use href="#star" x="130" y="100"
+                                    transform="translate(130, 100) scale(1.0) translate(-130, -100)" />
+                            </g>
+
+                            <!-- Texts -->
+                            <!-- Reduced font size and added positive dy to push text INWARD away from outer ring -->
+
+                            <text font-family="'Courier New', monospace" font-weight="bold" font-size="20"
+                                fill="#C02A2A" stroke="none" letter-spacing="2" text-anchor="middle" dy="6">
+                                <textPath href="#arcTop" startOffset="50%">MAHILA VASTRA</textPath>
+                            </text>
+
+                            <text font-family="'Courier New', monospace" font-weight="bold" font-size="18"
+                                fill="#C02A2A" stroke="none" letter-spacing="4" text-anchor="middle" dy="4">
+                                <textPath href="#arcBottom" startOffset="50%">GUARANTEE</textPath>
+                            </text>
+                        </g>
+                    </svg>
                 </div>
 
                 <div class="promise-header">
