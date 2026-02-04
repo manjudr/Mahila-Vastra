@@ -4619,3 +4619,77 @@ svg {
 .promise-chain .chain-title {
     color: var(--color-gold-light);
 }
+
+/* --- Premium Live Animation System --- */
+
+/* 1. Shimmering Gold Background for the Badge */
+.badge-pill-filled {
+    background: linear-gradient(120deg, var(--color-gold) 0%, #D4BC88 50%, var(--color-gold) 100%);
+    background-size: 200% 100%;
+    animation: badgeShimmer 5s ease-in-out infinite;
+    /* Ensure content stays on top */
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes badgeShimmer {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 2. The Central Dot */
+.live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    position: relative;
+    z-index: 2;
+    /* Soft glow around the dot itself */
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+}
+
+/* 3. Concentric Ripples (Radar Effect) */
+.live-dot::before,
+.live-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.6;
+    animation: premiumPulse 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.live-dot::after {
+    animation-delay: -1.25s;
+    /* Delays the second wave for continuous pulsing */
+}
+
+@keyframes premiumPulse {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.6;
+    }
+
+    100% {
+        width: 350%;
+        /* Expands much further */
+        height: 350%;
+        opacity: 0;
+    }
+}
