@@ -1413,10 +1413,109 @@ svg {
     transform: translateY(-2px);
 }
 
+/* Compact Instagram pill for hero */
+.btn-insta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.8rem;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--text-primary);
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border: 1px solid rgba(201, 168, 108, 0.35);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base), border-color var(--transition-base);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.btn-insta:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.97);
+    border-color: rgba(188, 24, 136, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(188, 24, 136, 0.12);
+}
+
+.btn-insta-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.25;
+}
+
+.btn-insta-main {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.btn-insta-sub {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    opacity: 0.65;
+    text-transform: none;
+}
+
 .btn-ghost {
     background: transparent;
     color: var(--text-primary);
     padding: var(--space-xs);
+}
+
+.hero-qr-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: rgba(255, 255, 255, 0.95);
+    padding: var(--space-xs) var(--space-md) var(--space-xs) var(--space-xs);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(201, 168, 108, 0.2);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+}
+
+.hero-qr-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201, 168, 108, 0.15);
+}
+
+.hero-qr-card .qr-img {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    display: block;
+}
+
+.hero-qr-card .qr-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-qr-card .qr-title {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-burgundy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.hero-qr-card .qr-desc {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
 .btn-ghost:hover {
@@ -1775,11 +1874,160 @@ svg {
     box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
 }
 
-.insta-grid {
+/* ==============================
+   Instagram QR Station Card
+   ============================== */
+.insta-qr-station {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: var(--space-lg) auto var(--space-xl);
+    padding: var(--space-xl) var(--space-2xl);
+    background: #fffef9;
+    border: 1.5px solid rgba(201, 168, 108, 0.45);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(139, 41, 66, 0.07), 0 2px 8px rgba(201, 168, 108, 0.1);
+    max-width: 320px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.insta-qr-station::before {
+    content: '✦  @mahilavastra.in  ✦';
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+    margin-bottom: var(--space-xs);
+}
+
+.insta-qr-station:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(139, 41, 66, 0.1), 0 4px 12px rgba(201, 168, 108, 0.15);
+}
+
+.insta-qr-station .qr-frame {
+    padding: var(--space-sm);
+    background: white;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(201, 168, 108, 0.25);
+    box-shadow: inset 0 0 0 4px rgba(201, 168, 108, 0.08);
+}
+
+.insta-qr-station .qr-frame img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+}
+
+.insta-qr-station .qr-caption {
+    text-align: center;
+}
+
+.insta-qr-station .qr-caption p {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.insta-qr-station .qr-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201, 168, 108, 0.5), transparent);
+    margin: var(--space-xs) auto;
+}
+
+@media (max-width: 480px) {
+    .insta-qr-station {
+        padding: var(--space-lg) var(--space-xl);
+        max-width: 280px;
+    }
+
+    .insta-qr-station .qr-frame img {
+        width: 170px;
+        height: 170px;
+    }
+}
+
+/* Elegant editorial Instagram section layout */
+.insta-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.insta-header-text {
+    flex: 1;
+    max-width: 520px;
+    text-align: left;
+}
+
+.insta-header-text .section-title {
+    text-align: left;
+}
+
+.insta-header-text .section-description {
+    text-align: left;
+}
+
+.insta-header-text .insta-badge-link {
+    margin-bottom: var(--space-sm);
+}
+
+.insta-header-row .hero-qr-card {
+    flex-shrink: 0;
+}
+
+/* Horizontal portrait photo strip */
+.insta-strip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-md);
-    margin-top: var(--space-lg);
+}
+
+.insta-strip .insta-item {
+    aspect-ratio: 3 / 4;
+}
+
+@media (max-width: 960px) {
+    .insta-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-lg);
+    }
+
+    .insta-header-text .section-title,
+    .insta-header-text .section-description {
+        text-align: left;
+    }
+
+    .insta-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .insta-header-row {
+        align-items: center;
+    }
+
+    .insta-header-text {
+        text-align: center;
+    }
+
+    .insta-header-text .section-title,
+    .insta-header-text .section-description {
+        text-align: center;
+    }
 }
 
 .insta-item {
